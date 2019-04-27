@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import Player from './features/player';
+import React, { Component } from "react";
+import World from "./features/world";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Player />
+        <World />
       </div>
     );
   }
