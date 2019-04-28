@@ -28,7 +28,7 @@ const MapTile = props => {
 
 const MapRow = props => {
   const { tiles } = props;
-  return tiles.map(tile => <MapTile tile={tile} />);
+  return tiles.map((tile, index) => <MapTile key={index} tile={tile} />);
 };
 
 class Map extends Component {
@@ -45,8 +45,8 @@ class Map extends Component {
           margin: "10px auto"
         }}
       >
-        {tiles.map(oneRowTiles => (
-          <MapRow tiles={oneRowTiles} />
+        {tiles.map((oneRowTiles, index) => (
+          <MapRow key={index} tiles={oneRowTiles} />
         ))}
       </div>
     );
