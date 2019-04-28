@@ -1,10 +1,16 @@
 .tile {
-  background-color: green;
-  display: inline-flex;
+  background-color: #42B842;
+  display: inline-block;
+  /* width: 40px;
+  height: 40px; */
 }
 
 .grass {
-  background-color: green;
+  background-color: #42B842;
+}
+
+.dirt-road {
+  background-image: url('/tiles/dirt-road.png');
 }
 
 .rock {

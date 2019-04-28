@@ -7,6 +7,10 @@ const getTileSprite = type => {
   switch (type) {
     case 0:
       return "grass";
+    case 3:
+      return "dirt-road";
+    case 4:
+      return "chest";
     case 5:
       return "rock";
     case 6:
@@ -28,7 +32,18 @@ const MapTile = props => {
 
 const MapRow = props => {
   const { tiles } = props;
-  return tiles.map((tile, index) => <MapTile key={index} tile={tile} />);
+  return (
+    <div
+      className="row"
+      style={{
+        height: SPRITE_SIZE
+      }}
+    >
+      {tiles.map((tile, index) => (
+        <MapTile key={index} tile={tile} />
+      ))}
+    </div>
+  );
 };
 
 class Map extends Component {
@@ -39,10 +54,8 @@ class Map extends Component {
         style={{
           position: "relative",
           width: "800px",
-          height: "560px",
-          backgroundColor: "green",
-          border: "4px solid white",
-          margin: "10px auto"
+          height: "480px",
+          backgroundColor: "#42B842"
         }}
       >
         {tiles.map((oneRowTiles, index) => (
