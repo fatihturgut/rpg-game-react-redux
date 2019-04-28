@@ -16,34 +16,46 @@ const handleMovement = Player => {
     }
   };
 
-  const observeBoundaries = (oldPosition, newPosition) => {
+  const observeBoundaries = newPosition => {
     return (newPosition[0] >= 0 && newPosition[0] <= MAP_WIDTH - SPRITE_SIZE) &&
-      (newPosition[1] >= 0 && newPosition[1] <= MAP_HEIGHT - SPRITE_SIZE)
-      ? newPosition
-      : oldPosition;
+      (newPosition[1] >= 0 && newPosition[1] <= MAP_HEIGHT - SPRITE_SIZE);
   };
 
-  const dispatchMove = direction => {
-    const oldPosition = store.getState().player.position;
+  const observeImpassable = newPosition => {
+    const tiles = store.getState().map.tiles;
+    const y = newPosition[1] / SPRITE_SIZE;
+    const x = newPosition[0] / SPRITE_SIZE;
+    const nextTile = tiles[y][x];
+    return nextTile < 5;
+  }
+
+  const dispatchMove = newPosition => {
     store.dispatch({
       type: "MOVE_PLAYER",
       payload: {
-        position: observeBoundaries(oldPosition, getNewPosition(direction))
+        position: newPosition
       }
     });
+  };
+
+  const attemptMove = direction => {
+    const newPosition = getNewPosition(direction);
+    if(observeBoundaries(newPosition) && observeImpassable(newPosition)) {
+      dispatchMove(newPosition);
+    }
   };
 
   const handleKeyDown = event => {
     event.preventDefault();
     switch (event.keyCode) {
       case 37:
-        return dispatchMove("WEST");
+        return attemptMove("WEST");
       case 39:
-        return dispatchMove("EAST");
+        return attemptMove("EAST");
       case 40:
-        return dispatchMove("NORTH");
+        return attemptMove("NORTH");
       case 38:
-        return dispatchMove("SOUTH");
+        return attemptMove("SOUTH");
       default:
         return null;
     }
