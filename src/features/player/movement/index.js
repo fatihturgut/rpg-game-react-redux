@@ -49,12 +49,16 @@ const handleMovement = Player => {
     event.preventDefault();
     switch (event.keyCode) {
       case 37:
+      case 65:
         return attemptMove("WEST");
       case 39:
+      case 68:
         return attemptMove("EAST");
       case 40:
+      case 83:
         return attemptMove("NORTH");
       case 38:
+      case 87:
         return attemptMove("SOUTH");
       default:
         return null;
