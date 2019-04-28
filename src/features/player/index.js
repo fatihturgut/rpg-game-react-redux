@@ -5,7 +5,7 @@ import handleMovement from "./movement";
 
 class Player extends Component {
   render() {
-    const { position } = this.props;
+    const { position, spriteLocation } = this.props;
     return (
       <div
         style={{
@@ -13,7 +13,7 @@ class Player extends Component {
           top: position[1],
           left: position[0],
           backgroundImage: `url('${walkSprite}')`,
-          backgroundPosition: "0 0",
+          backgroundPosition: spriteLocation,
           width: "40px",
           height: "40px"
         }}
