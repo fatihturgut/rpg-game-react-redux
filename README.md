@@ -1,5 +1,7 @@
 # Rpg Game with React Redux
 
+![RPG](https://media.giphy.com/media/Lr3eKnQH41cnqAPASF/giphy.gif)
+
 ### Setup
 
 - Clone this repo
