@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { SPRITE_SIZE } from "../../config/constants";
+import { MAP_HEIGHT, MAP_WIDTH, SPRITE_SIZE } from "../../config/constants";
 import "./styles.css";
 
 const getTileSprite = type => {
@@ -53,8 +53,8 @@ class Map extends Component {
       <div
         style={{
           position: "relative",
-          width: "800px",
-          height: "480px",
+          width: MAP_WIDTH,
+          height: MAP_HEIGHT,
           backgroundColor: "#42B842"
         }}
       >

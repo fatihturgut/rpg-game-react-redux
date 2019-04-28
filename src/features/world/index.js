@@ -4,6 +4,7 @@ import Player from "../player";
 
 import { tiles } from "../../data/maps/1";
 import store from "../../config/store";
+import { MAP_HEIGHT, MAP_WIDTH } from "../../config/constants";
 
 class World extends Component {
   render() {
@@ -12,9 +13,9 @@ class World extends Component {
       <div
         style={{
           position: "relative",
-          width: "800px",
-          height: "480px",
-          margin: "40px auto",
+          width: MAP_WIDTH,
+          height: MAP_HEIGHT,
+          margin: "50px auto",
           border: "4px solid white",
         }}
       >

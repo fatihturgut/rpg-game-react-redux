@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import walkSprite from "./assets/player-walk.png";
 import handleMovement from "./movement";
+import { SPRITE_SIZE } from "../../config/constants";
 
 class Player extends Component {
   render() {
@@ -14,8 +15,8 @@ class Player extends Component {
           left: position[0],
           backgroundImage: `url('${walkSprite}')`,
           backgroundPosition: spriteLocation,
-          width: "40px",
-          height: "40px"
+          width: SPRITE_SIZE,
+          height: SPRITE_SIZE
         }}
       />
     );
