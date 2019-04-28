@@ -39,7 +39,7 @@ class Map extends Component {
         style={{
           position: "relative",
           width: "800px",
-          height: "400px",
+          height: "560px",
           backgroundColor: "green",
           border: "4px solid white",
           margin: "10px auto"

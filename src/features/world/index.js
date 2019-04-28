@@ -13,8 +13,8 @@ class World extends Component {
         style={{
           position: "relative",
           width: "800px",
-          height: "400px",
-          margin: "10px auto"
+          height: "520px",
+          margin: "40px auto"
         }}
       >
         <Map />
