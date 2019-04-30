@@ -1,8 +1,10 @@
 .tile {
-  background-color: #42B842;
   display: inline-block;
-  /* width: 40px;
-  height: 40px; */
+  background-color: #42B842;
+}
+
+.shadow {
+  background-color: rgba(0,0,0,0.9) !important;
 }
 
 .grass {
