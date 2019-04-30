@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { MAP_HEIGHT, MAP_WIDTH, SPRITE_SIZE } from "../../config/constants";
+import {
+  MAP_HEIGHT,
+  MAP_WIDTH,
+  SPRITE_SIZE,
+  PLAYER_SIGHT_OF_RANGE
+} from "../../config/constants";
 import "./styles.css";
 
 const getTileSprite = type => {
@@ -20,18 +25,33 @@ const getTileSprite = type => {
   }
 };
 
+const hasShadow = (columnIndex, rowIndex, playerPosition) => {
+  const playetPositionX = playerPosition[0] / SPRITE_SIZE;
+  const playerPositionY = playerPosition[1] / SPRITE_SIZE;
+  const a = Math.abs(columnIndex - playerPositionY);
+  const b = Math.abs(rowIndex - playetPositionX);
+  return a >= PLAYER_SIGHT_OF_RANGE || b >= PLAYER_SIGHT_OF_RANGE;
+};
+
 const MapTile = props => {
-  const { tile } = props;
+  const { tile, columnIndex, rowIndex, playerPosition } = props;
   return (
     <div
       className={`tile ${getTileSprite(tile)}`}
       style={{ height: SPRITE_SIZE, width: SPRITE_SIZE }}
-    />
+    >
+      {hasShadow(columnIndex, rowIndex, playerPosition) && (
+        <div
+          className="shadow"
+          style={{ height: SPRITE_SIZE, width: SPRITE_SIZE }}
+        />
+      )}
+    </div>
   );
 };
 
 const MapRow = props => {
-  const { tiles } = props;
+  const { oneRowTiles, playerPosition, columnIndex } = props;
   return (
     <div
       className="row"
@@ -39,16 +59,24 @@ const MapRow = props => {
         height: SPRITE_SIZE
       }}
     >
-      {tiles.map((tile, index) => (
-        <MapTile key={index} tile={tile} />
-      ))}
+      {oneRowTiles.map((tile, rowIndex) => {
+        return (
+          <MapTile
+            key={rowIndex}
+            tile={tile}
+            columnIndex={columnIndex}
+            rowIndex={rowIndex}
+            playerPosition={playerPosition}
+          />
+        );
+      })}
     </div>
   );
 };
 
 class Map extends Component {
   render() {
-    const { tiles } = this.props;
+    const { tiles, playerPosition } = this.props;
     return (
       <div
         style={{
@@ -58,8 +86,13 @@ class Map extends Component {
           backgroundColor: "#42B842"
         }}
       >
-        {tiles.map((oneRowTiles, index) => (
-          <MapRow key={index} tiles={oneRowTiles} />
+        {tiles.map((oneRowTiles, columnIndex) => (
+          <MapRow
+            key={columnIndex}
+            columnIndex={columnIndex}
+            oneRowTiles={oneRowTiles}
+            playerPosition={playerPosition}
+          />
         ))}
       </div>
     );
@@ -67,7 +100,8 @@ class Map extends Component {
 }
 
 const mapStateToProps = state => ({
-  tiles: state.map.tiles
+  tiles: state.map.tiles,
+  playerPosition: state.player.position
 });
 
 export default connect(mapStateToProps)(Map);
