@@ -4,7 +4,7 @@ import {
   MAP_HEIGHT,
   MAP_WIDTH,
   SPRITE_SIZE,
-  BRIGHT_TILE_MATRIX_SIZE
+  PLAYER_SIGHT_OF_RANGE
 } from "../../config/constants";
 import "./styles.css";
 
@@ -30,7 +30,7 @@ const hasShadow = (columnIndex, rowIndex, playerPosition) => {
   const playerPositionY = playerPosition[1] / SPRITE_SIZE;
   const a = Math.abs(columnIndex - playerPositionY);
   const b = Math.abs(rowIndex - playetPositionX);
-  return a >= BRIGHT_TILE_MATRIX_SIZE || b >= BRIGHT_TILE_MATRIX_SIZE;
+  return a >= PLAYER_SIGHT_OF_RANGE || b >= PLAYER_SIGHT_OF_RANGE;
 };
 
 const MapTile = props => {
